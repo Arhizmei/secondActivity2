@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
 
 
     if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
-        bindingClass.textView.visibility = View.VISIBLE
-        bindingClass.textView.text = data.getStringExtra("yyy")
+        bindingClass.textView11.visibility = View.VISIBLE
+        bindingClass.textView11.text = data.getStringExtra("yyy")
 
     }}
 
@@ -50,6 +50,9 @@ class MainActivity : AppCompatActivity() {
                     bindingClass.textView1.text = "Wrong password"
                 }
             }
+
+            bindingClass.ed1.text.clear()
+            bindingClass.ed2.text.clear()
 
         }
 
