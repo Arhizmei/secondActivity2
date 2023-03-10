@@ -1,36 +1,57 @@
 package com.zmei.secondactivity2
 
 import Constant.constants
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.SyncStateContract.Constants
+import android.view.View
 import com.zmei.secondactivity2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var bindingClass : ActivityMainBinding
+    lateinit var bindingClass: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindingClass = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
 
-    bindingClass.button1.setOnClickListener {
 
-    var  account = bindingClass.ed1.text.toString()
-    when (account){
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
+            bindingClass.textView1.text = data.getStringExtra("zzz")
 
-        constants.admin-> {
-            var parol = bindingClass.ed2.text.toString()
-            if (constants.admin_parol == parol)
-            {
+        } else bindingClass.textView1.text = " Ошибка"
 
-                
+
+    if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
+        bindingClass.textView.visibility = View.VISIBLE
+        bindingClass.textView.text = data.getStringExtra("yyy")
+
+    }}
+
+        fun onClick (view: View) {
+            var account = bindingClass.ed1.text.toString()
+            when (account) {
+
+                constants.admin -> {
+                    var parol = bindingClass.ed2.text.toString()
+                    if (constants.admin_parol == parol) {
+                        val i = Intent(this, SecondActivity::class.java)
+                        i.putExtra("key", " Welcome ${constants.admin}")
+                        startActivityForResult(i, 100)
+
+                    } else bindingClass.textView1.text = "Wrong password"
+                }
+
+                else -> {
+                    bindingClass.textView1.text = "Wrong password"
+                }
             }
-            else bindingClass.textView1.text = "Wrong password"}
 
-        else -> {bindingClass.textView1.text = "Wrong password"}
-    }
+        }
 
-    }
-    }
+
 }
